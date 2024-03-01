@@ -11,10 +11,10 @@ namespace DefMonRelocator {
         private static byte _add96;
 
         private static readonly short[] TabFb =
-            { 0x16b1, 0x16b5, 0x16bf, 0x16c7, 0x16d1, 0x16dd, 0x16e9, 0x16fd, 0x1709, 0x1714, 0x171e, 0x172c, 0x1734, 0x1747, 0x1758, 0x1763, 0x176e, 0x1771 };
+            { 0x06b1, 0x06b5, 0x06bf, 0x06c7, 0x06d1, 0x06dd, 0x06e9, 0x06fd, 0x0709, 0x0714, 0x071e, 0x072c, 0x0734, 0x0747, 0x0758, 0x0763, 0x076e, 0x0771 };
 
-        private static readonly short[] TabFc = { 0x12fd, 0x132e, 0x135f, 0x1390, 0x13c1, 0x13f2 };
-        private static readonly short[] Tab96 = { 0x16ba, 0x16cc, 0x16d6, 0x16e2, 0x16f6, 0x1702, 0x1719, 0x1723, 0x174f };
+        private static readonly short[] TabFc = { 0x02fd, 0x032e, 0x035f, 0x0390, 0x03c1, 0x03f2 };
+        private static readonly short[] Tab96 = { 0x06ba, 0x06cc, 0x06d6, 0x06e2, 0x06f6, 0x0702, 0x0719, 0x0723, 0x074f };
 
         // ========================================================================================
         private struct OpCode {
@@ -178,7 +178,7 @@ namespace DefMonRelocator {
             new OpCode { Txt = "txs", Code = 0x9A, ArgsNr = 0, Relocate = false }, // TXS
             new OpCode { Txt = "tya", Code = 0x98, ArgsNr = 0, Relocate = false }, // TYA
 
-            new OpCode { Txt = "nop", Code = 0x5A, ArgsNr = 0, Relocate = false }, // TYA
+            new OpCode { Txt = "nop", Code = 0x5A, ArgsNr = 0, Relocate = false }, // NOP
 
             // Illegal opcodes
             new OpCode { Txt = "slo", Code = 0x07, ArgsNr = 1, Relocate = false }, // SLO zp
@@ -338,21 +338,19 @@ namespace DefMonRelocator {
                         _addFc = Convert.ToByte(args[4], 16);
                         _add96 = Convert.ToByte(args[5], 16);
 
-                        for (int i = 2; i < _file.Length; i++) {
-                            for (int j = 0; j < TabFb.Length; j++) {
-                                if (i == (TabFb[j] - _pc + 2))
-                                    _file[i] = _addFb;
-                            }
+                        foreach (var t in TabFb) {
+                            Console.WriteLine(">{0:X4}: {1:X2}", t, _addFb);
+                            _file[t + 2] = _addFb;
+                        }
 
-                            for (int j = 0; j < TabFc.Length; j++) {
-                                if (i == (TabFc[j] - _pc + 2))
-                                    _file[i] = _addFc;
-                            }
+                        foreach (var t in TabFc) {
+                            Console.WriteLine(">{0:X4}: {1:X2}", t, _addFc);
+                            _file[t + 2] = _addFc;
+                        }
 
-                            for (int j = 0; j < Tab96.Length; j++) {
-                                if (i == (Tab96[j] - _pc + 2))
-                                    _file[i] = _add96;
-                            }
+                        foreach (var t in Tab96) {
+                            Console.WriteLine(">{0:X4}: {1:X2}", t, _add96);
+                            _file[t + 2] = _add96;
                         }
 
                         Console.WriteLine("Changed $FB to ${0:X2}", _addFb);
