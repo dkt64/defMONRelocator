@@ -331,7 +331,7 @@ namespace DefMonRelocator {
                             _file[i] += (byte)_diffRelocate;
                     }
 
-                    if (args[3] != null && args[4] != null && args[5] != null) {
+                    if (args.Length == 6) {
                         Console.WriteLine("Relocating zeropage usage...", _addFb);
 
                         _addFb = Convert.ToByte(args[3], 16);
