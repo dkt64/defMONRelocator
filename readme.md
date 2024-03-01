@@ -40,4 +40,8 @@ DKT / Samar
 ## Version History
 
 * 1.0.0 [2024-03-01]
-    * Initial Release
+  * Initial Release.
+* 1.0.1 [2024-03-01]
+  * Better CLI arguments passing.
+* 1.1.0 [2024-03-01]
+  * Fix of zero page addresses change for tunes located at location different than $1000.
