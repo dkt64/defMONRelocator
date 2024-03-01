@@ -2,7 +2,22 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
+        <Version>1.0.0</Version>
+        <Title>defMONRelocator</Title>
+        <Authors>DKT</Authors>
+        <Description>CLI tool to relocate PRG music files created using defMON music editor for Commodore 64.</Description>
+        <PackageProjectUrl>https://github.com/dkt64/defMONRelocator</PackageProjectUrl>
+        <Company>Samar</Company>
+        <Product>defMONRelocator</Product>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
 
 </Project>

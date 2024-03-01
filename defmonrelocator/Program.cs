@@ -314,7 +314,8 @@ namespace DefMonRelocator {
                     _diffRelocate = ((_addDest - _pc) >> 8) & 0xff;
 
                     Console.WriteLine("Load address = ${0:X}", _file[1] * 256 + _file[0]);
-                    Console.WriteLine("Difference in high byte = ${0:X2}", _diffRelocate);
+                    Console.WriteLine("Difference in load address higher byte = ${0:X2}", _diffRelocate);
+                    Console.WriteLine("Relocating player code...");
 
                     Relocate(2 + 0x0000, 2 + 0x031c);
                     Relocate(2 + 0x0321, 2 + 0x0577);
